@@ -2,7 +2,13 @@ import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
+
+  let service: AppComponent;
+
   beforeEach(async () => {
+
+    let service = new AppComponent();
+    
     await TestBed.configureTestingModule({
       declarations: [
         AppComponent
@@ -22,10 +28,22 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('buscaminas-ey');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('buscaminas-ey app is running!');
+  it('should calculate the correct number of bombs', () => {
+    const app = new AppComponent();
+    app.squares = [
+      ['b', 0, 0],
+      [0, 0, 0],
+      [0, 0, 0]
+    ];
+
+    app.numbersBomb(0, 0);
+    expect(app.squares[0][0]).toBe('b');
+
+    app.numbersBomb(1, 1);
+    expect(app.squares[1][1]).toBe(1);
+
+    app.numbersBomb(2, 2);
+    expect(app.squares[2][2]).toBe(0);
   });
+
 });
