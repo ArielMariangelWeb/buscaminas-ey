@@ -1,8 +1,11 @@
 <div class="container p-5">
   <button (click)="reset()" [ngClass]="happy ? 'happy' : 'sad'" class="mb-4"></button>
-  <div *ngFor="let row of squares; let v = index" class="row">
-    <button *ngFor="let col of row; let h = index;" (click)="boom(col, v, h)" [ngClass]="col === 'b' && isBomb ? 'bomb' : 'normal-square'" [class.zero]="col === 0">
+  <div  *ngFor="let row of squares; let v = index" class="row">
+    <button *ngFor="let col of row; let h = index;" (click)="boom(col, v, h)" [ngClass]="col === 'b' && isBomb ? 'bomb' : 'normal-square'" [class.zero]="col === 0" [disabled]="disabled">
       <span [ngStyle]="(display && col !== 'b') || (display && col === 0) ? {'display': 'block'}: {'display': 'none'}">{{col}}</span>
     </button>    
+  </div>
+  <div *ngIf="win" class="win-message">
+    <p>!Ganaste¡</p>
   </div>
 </div>
